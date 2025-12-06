@@ -36,11 +36,16 @@ public class PlayerMovement : MonoBehaviour
 
     Animator animator;
 
+    InputManagerForPlayer playerInput;
+    public bool is2P;
+
     private void Awake()
     {
         isFacingRight = true;
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponentInChildren<Animator>();
+
+        playerInput = GetComponent<InputManagerForPlayer>();
     }
 
     private void Update()
@@ -56,14 +61,14 @@ public class PlayerMovement : MonoBehaviour
         CollisionChecks();
         Jump();
 
-        if (isGrounded) { Move(stats.GroundAcceleration, stats.GroundDeceleration, InputManager.Singleton.MoveInput); }
-        else { Move(stats.AirAcceleration, stats.AirDeceleration, InputManager.Singleton.MoveInput); }
+        if (isGrounded) { Move(stats.GroundAcceleration, stats.GroundDeceleration, playerInput.MoveInput); }
+        else { Move(stats.AirAcceleration, stats.AirDeceleration, playerInput.MoveInput); }
     }
 
     void Move(float acceleration, float deceleration, Vector2 moveInput)
     {
         Vector2 targetVelocity = Vector2.zero;
-        if (moveInput != Vector2.zero)
+        if (moveInput.sqrMagnitude > 0.1f)
         {
             TurnCheck(moveInput);
             targetVelocity = new Vector2(moveInput.x, 0) * stats.MaxWalkSpeed;
@@ -104,13 +109,13 @@ public class PlayerMovement : MonoBehaviour
 
     void JumpChecks()
     {
-        if (InputManager.Singleton.JumpButtonDown)
+        if (playerInput.JumpButtonDown)
         {
             jumpBufferTimer = stats.JumpBufferTime;
             jumpReleasedDuringBuffer = false;
         }
 
-        if (InputManager.Singleton.JumpButtonUp)
+        if (playerInput.JumpButtonUp)
         {
             if (jumpBufferTimer > 0)
             {
@@ -271,21 +276,21 @@ public class PlayerMovement : MonoBehaviour
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, VerticalVelocity);
     }
 
-void CountTimers()
-{
-    jumpBufferTimer -= Time.deltaTime;
-    if (jumpBufferTimer < 0f) jumpBufferTimer = 0f; // evita negativos persistentes
+    void CountTimers()
+    {
+        jumpBufferTimer -= Time.deltaTime;
+        if (jumpBufferTimer < 0f) jumpBufferTimer = 0f; // evita negativos persistentes
 
-    if (!isGrounded)
-    {
-        coyoteTimer -= Time.deltaTime;
-        if (coyoteTimer < 0f) coyoteTimer = 0f;
+        if (!isGrounded)
+        {
+            coyoteTimer -= Time.deltaTime;
+            if (coyoteTimer < 0f) coyoteTimer = 0f;
+        }
+        else
+        {
+            coyoteTimer = stats.JumpCoyoteTime; // reseteo inmediato cuando estás en tierra
+        }
     }
-    else
-    {
-        coyoteTimer = stats.JumpCoyoteTime; // reseteo inmediato cuando estás en tierra
-    }
-}
 
 
     void IsGrounded()
@@ -356,7 +361,7 @@ void CountTimers()
     bool wasRunningLastFrame;
     void Flip()
     {
-        float x = InputManager.Singleton.MoveInput.x;
+        float x = playerInput.MoveInput.x;
         if (x > 0) transform.localScale = Vector3.one;
         else if (x < 0) transform.localScale = new Vector3(-1, 1, 1);
     }
@@ -384,7 +389,16 @@ void CountTimers()
     void PlayAnim(string animName)
     {
         if (currentAnim == animName || IsBlockingAnimationPlaying()) return;
-        animator.Play(animName);
+
+        if (is2P)
+        {
+            animator.Play(animName + "_2");
+        }
+        else
+        {
+            animator.Play(animName);
+        }
+
         currentAnim = animName;
     }
 
