@@ -264,13 +264,10 @@ public class PlayerMovement : MonoBehaviour
             VerticalVelocity += stats.Gravity * stats.GravityOnReleaseMultiplier * Time.fixedDeltaTime;
         }
 
-        // Normalizar/aplicar gravedad si estamos en caída fuera del bloque de isJumping
         if (isJumping == false && isFastFalling == false && !isGrounded)
         {
-            // ya aplicado arriba donde corresponde
         }
 
-        // Clamp final
         VerticalVelocity = Mathf.Clamp(VerticalVelocity, -stats.MaxFallSpeed, 50f);
 
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, VerticalVelocity);
@@ -279,8 +276,7 @@ public class PlayerMovement : MonoBehaviour
     void CountTimers()
     {
         jumpBufferTimer -= Time.deltaTime;
-        if (jumpBufferTimer < 0f) jumpBufferTimer = 0f; // evita negativos persistentes
-
+        if (jumpBufferTimer < 0f) jumpBufferTimer = 0f; 
         if (!isGrounded)
         {
             coyoteTimer -= Time.deltaTime;
@@ -288,7 +284,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            coyoteTimer = stats.JumpCoyoteTime; // reseteo inmediato cuando estás en tierra
+            coyoteTimer = stats.JumpCoyoteTime; 
         }
     }
 
@@ -359,18 +355,12 @@ public class PlayerMovement : MonoBehaviour
     string currentAnim = "";
     bool wasGroundedLastFrame;
     bool wasRunningLastFrame;
-    void Flip()
-    {
-        float x = playerInput.MoveInput.x;
-        if (x > 0) transform.localScale = Vector3.one;
-        else if (x < 0) transform.localScale = new Vector3(-1, 1, 1);
-    }
 
     void HandleAnimations()
     {
         float horizontalSpeed = Mathf.Abs(rb.linearVelocityX);
-        bool isRunning = horizontalSpeed > 0.1f && isGrounded;
-        //bool isStopping = wasRunningLastFrame && !isRunning && isGrounded;
+        bool isRunning = horizontalSpeed > 0.1f && isGrounded && (playerInput.MoveInput.x > 0.1f || playerInput.MoveInput.x < -0.1f);
+        bool isStopping = wasRunningLastFrame && !isRunning && isGrounded;
         bool isFalling = rb.linearVelocity.y < -0.1f && !isGrounded;
         bool isRising = rb.linearVelocity.y > 0.1f && !isGrounded;
         bool justLanded = !wasGroundedLastFrame && isGrounded;
@@ -392,11 +382,11 @@ public class PlayerMovement : MonoBehaviour
 
         if (is2P)
         {
-            animator.Play(animName + "_2");
+            animator.Play(animName + "_2", 0, 0);
         }
         else
         {
-            animator.Play(animName);
+            animator.Play(animName, 0, 0);
         }
 
         currentAnim = animName;
@@ -406,7 +396,7 @@ public class PlayerMovement : MonoBehaviour
     {
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
         bool isBlocking = currentAnim == "Jump" || currentAnim == "Land" || currentAnim == "Stop";
-        return isBlocking && stateInfo.normalizedTime < 1f;
+        return isBlocking && stateInfo.normalizedTime < .9f;
     }
 
 }

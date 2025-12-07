@@ -27,16 +27,16 @@ public class ControlPiso : MonoBehaviour
         if (transform.position.y <= alturaLimite)
         {
             // Llamar a la función del otro script
-            if (cargaDeBloques != null)
-            {
-                cargaDeBloques.DefinirPisoSpawn();
-            }
-            else
-            {
-                Debug.LogWarning("No se ha asignado el script 'CargaDeBloques'.");
-            }
+            //if (cargaDeBloques != null)
+            //{
+            //    cargaDeBloques.DefinirPisoSpawn();
+            //}
+            //else
+            //{
+            //    Debug.LogWarning("No se ha asignado el script 'CargaDeBloques'.");
+            //}
 
-            Destroy(gameObject);
+            Destroy(transform.parent.gameObject);
         }
     }
 }
