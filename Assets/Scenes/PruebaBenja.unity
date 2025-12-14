@@ -229,9 +229,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0
-    width: 1
-    height: 0.99983245
+    y: 0.08045053
+    width: 0.4826546
+    height: 0.48270315
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -291,6 +291,38 @@ MonoBehaviour:
   m_CropFrameX: 0
   m_CropFrameY: 0
   m_StretchFill: 0
+--- !u!1 &327296825
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 327296826}
+  m_Layer: 0
+  m_Name: InitialBG
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &327296826
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 327296825}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.41265, y: 14.79146, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 664177828}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &428639382 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 329254684384337755, guid: 7e26cb13477b60e43a52c57ff70f91fb, type: 3}
@@ -344,7 +376,8 @@ MonoBehaviour:
   pisos:
   - {fileID: 4481727127181340464, guid: 6306158ed6d7bf149a660e00e8bb6203, type: 3}
   spawnearPisos: 1
-  intervaloEntreSpawnDePisos: 0.4
+  intervaloEntreSpawnDePisos: 3
+  suelo: {fileID: 0}
 --- !u!1 &664177825
 GameObject:
   m_ObjectHideFlags: 0
@@ -356,6 +389,7 @@ GameObject:
   - component: {fileID: 664177828}
   - component: {fileID: 664177827}
   - component: {fileID: 664177826}
+  - component: {fileID: 664177829}
   m_Layer: 3
   m_Name: Square
   m_TagString: Untagged
@@ -476,12 +510,27 @@ Transform:
   m_GameObject: {fileID: 664177825}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.2296024, y: -10.128476, z: 0}
+  m_LocalPosition: {x: 5.41265, y: -18.991459, z: 0}
   m_LocalScale: {x: 40.40397, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 836178251}
+  m_Father: {fileID: 327296826}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &664177829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 664177825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51d61cd8291d1de4ba07f5f610dd5cec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ControlPiso
+  velocidad: 5
+  alturaLimite: -15
+  cargaDeBloques: {fileID: 0}
 --- !u!1 &699809769
 GameObject:
   m_ObjectHideFlags: 0
@@ -636,7 +685,6 @@ Transform:
   - {fileID: 1328481459}
   - {fileID: 444858025}
   - {fileID: 1328132497}
-  - {fileID: 664177828}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1041025473
@@ -1183,3 +1231,4 @@ SceneRoots:
   - {fileID: 2073876783}
   - {fileID: 2104265346}
   - {fileID: 836178251}
+  - {fileID: 327296826}
