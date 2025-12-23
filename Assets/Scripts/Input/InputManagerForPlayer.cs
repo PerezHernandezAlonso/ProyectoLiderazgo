@@ -7,11 +7,13 @@ public class InputManagerForPlayer : MonoBehaviour
     private PlayerInput playerInput;
     private InputAction move;
     private InputAction jump;
+    private InputAction shoot;
 
     public Vector2 MoveInput { get; private set; }
     public bool JumpButton { get; private set; }
     public bool JumpButtonDown { get; private set; }
     public bool JumpButtonUp { get; private set; }
+    public bool ShootButton { get; private set; }
 
     private InputBuffer jumpBuffer;
     [SerializeField] float inputBufferTime = 0.2f;
@@ -26,6 +28,7 @@ public class InputManagerForPlayer : MonoBehaviour
     {
         move = playerInput.actions["Move"];
         jump = playerInput.actions["Jump"];
+        shoot = playerInput.actions["Attack"];
     }
 
     private void Update()
@@ -38,6 +41,8 @@ public class InputManagerForPlayer : MonoBehaviour
 
         if (JumpButtonDown) jumpBuffer.RegisterInput();
         jumpBuffer.Update();
+
+        ShootButton = shoot.IsPressed();    
     }
     public class InputBuffer
     {

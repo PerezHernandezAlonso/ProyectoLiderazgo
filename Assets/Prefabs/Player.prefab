@@ -88,6 +88,8 @@ MonoBehaviour:
   jumpBufferTimer: 0
   coyoteTimer: 0
   is2P: 0
+  currentGun: 1
+  bullet: {fileID: 1741324345822296204, guid: f3f3d1bc5034a494583401b0402bcd20, type: 3}
 --- !u!114 &909157123794622815
 MonoBehaviour:
   m_ObjectHideFlags: 0
