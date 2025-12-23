@@ -228,10 +228,10 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.089062504
-    y: 0
-    width: 0.82222223
-    height: 1
+    x: 0
+    y: 0.1591512
+    width: 0.7494145
+    height: 0.9549071
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -291,38 +291,6 @@ MonoBehaviour:
   m_CropFrameX: 0
   m_CropFrameY: 0
   m_StretchFill: 0
---- !u!1 &327296825
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 327296826}
-  m_Layer: 0
-  m_Name: InitialBG
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &327296826
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 327296825}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.41265, y: 14.79146, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 664177828}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &428639382 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 329254684384337755, guid: 7e26cb13477b60e43a52c57ff70f91fb, type: 3}
@@ -375,8 +343,8 @@ MonoBehaviour:
   Spawner: {fileID: 444858024}
   pisos:
   - {fileID: 4481727127181340464, guid: 6306158ed6d7bf149a660e00e8bb6203, type: 3}
-  spawnearPisos: 0
-  intervaloEntreSpawnDePisos: 3
+  spawnearPisos: 1
+  intervaloEntreSpawnDePisos: 1
   suelo: {fileID: 0}
 --- !u!1 &664177825
 GameObject:
@@ -389,7 +357,6 @@ GameObject:
   - component: {fileID: 664177828}
   - component: {fileID: 664177827}
   - component: {fileID: 664177826}
-  - component: {fileID: 664177829}
   m_Layer: 3
   m_Name: Square
   m_TagString: Untagged
@@ -510,27 +477,12 @@ Transform:
   m_GameObject: {fileID: 664177825}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.41265, y: -18.991459, z: 0}
+  m_LocalPosition: {x: 0.2296024, y: -10.128476, z: 0}
   m_LocalScale: {x: 40.40397, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 327296826}
+  m_Father: {fileID: 836178251}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &664177829
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 664177825}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51d61cd8291d1de4ba07f5f610dd5cec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ControlPiso
-  velocidad: 5
-  alturaLimite: -15
-  cargaDeBloques: {fileID: 0}
 --- !u!1 &699809769
 GameObject:
   m_ObjectHideFlags: 0
@@ -685,6 +637,7 @@ Transform:
   - {fileID: 1328481459}
   - {fileID: 444858025}
   - {fileID: 1328132497}
+  - {fileID: 664177828}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1041025473
@@ -835,28 +788,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InputManager
   playerInput: {fileID: 0}
-  Move:
-    m_Name: 
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 13740960-ba6f-4ea5-b386-b3e18485748d
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-  Jump:
-    m_Name: 
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 7f3375eb-7ee6-456b-a438-8de7f04d42f8
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-  moveInput: {x: 0, y: 0}
-  <JumpButton>k__BackingField: 0
-  <JumpButtonDown>k__BackingField: 0
-  <JumpButtonUp>k__BackingField: 0
   inputBufferTime: 0.2
 --- !u!4 &1196150713
 Transform:
@@ -1099,7 +1030,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 7e8a2f48a281bb6428328d2c0bbaa448, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.48452607, g: 1, b: 0.43867922, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1253,4 +1184,3 @@ SceneRoots:
   - {fileID: 2073876783}
   - {fileID: 2104265346}
   - {fileID: 836178251}
-  - {fileID: 327296826}

@@ -87,6 +87,9 @@ MonoBehaviour:
   fastFallTime: 0
   jumpBufferTimer: 0
   coyoteTimer: 0
+  is2P: 0
+  currentGun: 1
+  bullet: {fileID: 1741324345822296204, guid: f3f3d1bc5034a494583401b0402bcd20, type: 3}
 --- !u!114 &909157123794622815
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,7 +117,7 @@ MonoBehaviour:
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: df70fa95-8a34-4494-b137-73ab6b9c7d37
+  m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!114 &-1406318537755179739
@@ -287,7 +290,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 35
+  m_SortingOrder: 2
   m_Sprite: {fileID: 1129155825834751818, guid: 84953e1d728f0ea4089af5b49f4a852d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

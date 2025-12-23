@@ -1,5 +1,7 @@
 using System.Security;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -39,6 +41,10 @@ public class PlayerMovement : MonoBehaviour
     InputManagerForPlayer playerInput;
     public bool is2P;
 
+    float knockback;
+    [SerializeField] float shootingKnockbackForce = 5f;
+    float knockbackDamping = 10f;
+
     private void Awake()
     {
         isFacingRight = true;
@@ -52,6 +58,7 @@ public class PlayerMovement : MonoBehaviour
     {
         JumpChecks();
         CountTimers();
+        CheckShoot();
 
         HandleAnimations();
     }
@@ -63,8 +70,12 @@ public class PlayerMovement : MonoBehaviour
 
         if (isGrounded) { Move(stats.GroundAcceleration, stats.GroundDeceleration, playerInput.MoveInput); }
         else { Move(stats.AirAcceleration, stats.AirDeceleration, playerInput.MoveInput); }
+       
+        knockback = Mathf.Lerp(knockback, 0f, knockbackDamping * Time.fixedDeltaTime);
+        rb.linearVelocity = new Vector2(moveVelocity.x + knockback, VerticalVelocity);
     }
 
+    // MOVEMENT
     void Move(float acceleration, float deceleration, Vector2 moveInput)
     {
         Vector2 targetVelocity = Vector2.zero;
@@ -74,12 +85,12 @@ public class PlayerMovement : MonoBehaviour
             targetVelocity = new Vector2(moveInput.x, 0) * stats.MaxWalkSpeed;
 
             moveVelocity = Vector2.Lerp(moveVelocity, targetVelocity, acceleration * Time.fixedDeltaTime);
-            rb.linearVelocity = new Vector2(moveVelocity.x, rb.linearVelocity.y);
+            //rb.linearVelocity = new Vector2(moveVelocity.x, rb.linearVelocity.y);
         }
         else
         {
             moveVelocity = Vector2.Lerp(moveVelocity, Vector2.zero, deceleration * Time.fixedDeltaTime);
-            rb.linearVelocity = new Vector2(moveVelocity.x, rb.linearVelocity.y);
+            //rb.linearVelocity = new Vector2(moveVelocity.x, rb.linearVelocity.y);
         }
     }
     void TurnCheck(Vector2 moveInput)
@@ -107,6 +118,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    // JUMP
     void JumpChecks()
     {
         if (playerInput.JumpButtonDown)
@@ -272,11 +284,10 @@ public class PlayerMovement : MonoBehaviour
 
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, VerticalVelocity);
     }
-
     void CountTimers()
     {
         jumpBufferTimer -= Time.deltaTime;
-        if (jumpBufferTimer < 0f) jumpBufferTimer = 0f; 
+        if (jumpBufferTimer < 0f) jumpBufferTimer = 0f;
         if (!isGrounded)
         {
             coyoteTimer -= Time.deltaTime;
@@ -284,11 +295,9 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            coyoteTimer = stats.JumpCoyoteTime; 
+            coyoteTimer = stats.JumpCoyoteTime;
         }
     }
-
-
     void IsGrounded()
     {
         Vector2 boxCastOrigin = new Vector2(feetCollider.bounds.center.x, feetCollider.bounds.min.y);
@@ -350,12 +359,121 @@ public class PlayerMovement : MonoBehaviour
         BumpedHead();
     }
 
+    // PLAYERS SHOOT
+    public enum guns { none, pistol, shotgun, tommy };
+    [SerializeField] guns currentGun;
+
+    int maxCurrentAmmo;
+    int currentAmmo;
+
+    bool shotCooldown;
+
+    [SerializeField] GameObject bullet;
+
+    [Header("Pistol")]
+    int pistolMaxAmmo = 5;
+    float pistolSpeed = 100f;
+    float pistolRange = .4f;
+    int pistolSpread = 0;
+    float pistolRate = .3f;
+
+    [Header("Shotgun")]
+    int shotgunMaxAmmo = 3;
+    float shotgunSpeed = 100f;
+    float shotgunRange = .1f;
+    int shotgunSpread = 5;
+    float shotgunRate = 1f;
+
+    [Header("Tommy")]
+    int tommyMaxAmmo = 7;
+    float tommySpeed = 100f;
+    float tommyRange = .4f;
+    int tommySpread = 1;
+    float tommyRate = .1f;
+
+    public void PickUpGun(guns gunPickUp)
+    {
+        currentGun = gunPickUp;
+        switch (currentGun)
+        {
+            case guns.pistol:
+                maxCurrentAmmo = pistolMaxAmmo;
+                currentAmmo = maxCurrentAmmo;
+                break;
+            case guns.shotgun:
+                maxCurrentAmmo = shotgunMaxAmmo;
+                currentAmmo = maxCurrentAmmo;
+                break;
+            case guns.tommy:
+                maxCurrentAmmo = tommyMaxAmmo;
+                currentAmmo = maxCurrentAmmo;
+                break;
+        }
+        shotCooldown = false;
+    }
+    void CheckShoot()
+    {
+        if (shotCooldown) return;
+        if (currentGun != guns.none && playerInput.ShootButton)
+        {
+            switch (currentGun)
+            {
+                case guns.pistol:
+                    Shoot(pistolSpeed, pistolSpread, pistolRate, pistolRange);
+                    break;
+                case guns.shotgun:
+                    Shoot(shotgunSpeed, shotgunSpread, shotgunRate, shotgunRange);
+                    break;
+                case guns.tommy:
+                    Shoot(tommySpeed, tommySpread, tommyRate, tommyRange);
+                    break;
+            }
+        }
+    }
+    void Shoot(float speed, int spread, float rate, float range)
+    {
+        if (shotCooldown) return;
+
+        if (spread > 0)
+        {
+            for (int i = 0; i < spread; i++)
+            {
+                SpawnBulletShoot(speed, spread, range);
+            }
+        }
+        else { SpawnBulletShoot(speed, spread, range); }
+
+        shotCooldown = true;
+        Invoke(nameof(EnableShooting), rate);
+    }
+
+    void SpawnBulletShoot(float speed, int spread, float range)
+    {
+        float offset = 1f;
+        Vector3 spawnPos = transform.position + new Vector3(isFacingRight ? offset : -offset, 0.2f, 0);
+
+        float baseAngle = isFacingRight ? 0f : 180f;
+        float randomAngle = randomAngle = (spread > 3) ? Random.Range(-30f, 30f) : (spread > 0) ? Random.Range(-5f, 5f) : 0f;
+        float finalAngle = baseAngle + randomAngle;
+        Quaternion rot = Quaternion.Euler(0, 0, finalAngle);
+
+        GameObject newBullet = Instantiate(bullet, spawnPos, rot);
+        Rigidbody2D bulletRB = newBullet.GetComponent<Rigidbody2D>();
+        Vector2 direction = rot * Vector2.right;
+        bulletRB.AddForce(direction * speed, ForceMode2D.Impulse);
+
+        knockback += -direction.x * shootingKnockbackForce;
+
+        Destroy(newBullet, range);
+    }
+
+    void EnableShooting() { shotCooldown = false; }
+
     // ANIMATIONS
 
     string currentAnim = "";
     bool wasGroundedLastFrame;
     bool wasRunningLastFrame;
-
     void HandleAnimations()
     {
         float horizontalSpeed = Mathf.Abs(rb.linearVelocityX);
@@ -375,23 +493,37 @@ public class PlayerMovement : MonoBehaviour
         wasGroundedLastFrame = isGrounded;
         wasRunningLastFrame = isRunning;
     }
-
     void PlayAnim(string animName)
     {
         if (currentAnim == animName || IsBlockingAnimationPlaying()) return;
 
+        if (currentGun != guns.none)
+        {
+            switch (currentGun)
+            {
+                case guns.pistol:
+                    animName += "_Pistol";
+                    break;
+                case guns.shotgun:
+                    animName += "_Shotgun";
+                    break;
+                case guns.tommy:
+                    animName += "_Tommy";
+                    break;
+            }
+        }
+
         if (is2P)
         {
-            animator.Play(animName + "_2", 0, 0);
+            animator.Play(animName + "_2");
         }
         else
         {
-            animator.Play(animName, 0, 0);
+            animator.Play(animName);
         }
 
         currentAnim = animName;
     }
-
     bool IsBlockingAnimationPlaying()
     {
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
@@ -400,3 +532,4 @@ public class PlayerMovement : MonoBehaviour
     }
 
 }
+
