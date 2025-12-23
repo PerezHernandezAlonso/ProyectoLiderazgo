@@ -278,7 +278,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SampleGun
   assignedPlayer: {fileID: 933348943}
   holdingOffset: {x: 0.21, y: 0}
-  bullet: {fileID: 9034223401608369720, guid: da707f6c1dcf8a94bab7f0a2f9a7ec00, type: 3}
+  bullet: {fileID: 905249262110153154, guid: 31f6677c1f835a946a0f8e95c7580fab, type: 3}
   ammo: 5
   maxAmmo: 5
   automatic: 0
@@ -432,6 +432,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2670247243595223540, guid: a0d04e882d15cc140aada452627fa8f3, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4635492411876498536, guid: a0d04e882d15cc140aada452627fa8f3, type: 3}
       propertyPath: m_LocalScale.x
       value: 12.34
@@ -450,7 +454,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4635492411876498536, guid: a0d04e882d15cc140aada452627fa8f3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.3949745
+      value: -4.99
       objectReference: {fileID: 0}
     - target: {fileID: 4635492411876498536, guid: a0d04e882d15cc140aada452627fa8f3, type: 3}
       propertyPath: m_LocalPosition.z
