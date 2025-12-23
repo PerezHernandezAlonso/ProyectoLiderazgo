@@ -8,6 +8,7 @@ public class SampleGun : Gun
         ammo = maxAmmo;
         baseCoolDown = 0.2f;
     }
+    [ContextMenu("Fire Gun")]
     public override void Shoot() => base.Shoot();
 
 

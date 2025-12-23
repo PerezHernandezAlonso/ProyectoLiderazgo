@@ -23,9 +23,35 @@ public abstract class Gun : MonoBehaviour
     public bool isFacingRight;
     //When the gun has no assigned player, the radius at which the gun will be automatically assigned to a player
     public float pickUpRadius;
+    private CircleCollider2D pickupTrigger;
+
 
     private InputManagerForPlayer playerInputManager;
 
+    protected virtual void Awake()
+    {
+        pickupTrigger = GetComponent<CircleCollider2D>();
+
+        if (pickupTrigger == null)
+            pickupTrigger = gameObject.AddComponent<CircleCollider2D>();
+
+        pickupTrigger.isTrigger = true;
+
+        UpdatePickupRadius();
+    }
+    private void UpdatePickupRadius()
+    {
+        if (pickUpRadius > 0f)
+        {
+            pickupTrigger.enabled = true;
+            pickupTrigger.radius = pickUpRadius;
+        }
+        else
+        {
+            pickupTrigger.radius = 0f;
+            pickupTrigger.enabled = false;
+        }
+    }
     public void Update()
     {
         //This won't work with multiple players, still trying to adjust this. 
@@ -33,7 +59,8 @@ public abstract class Gun : MonoBehaviour
         if (assignedPlayer == null) return;
 
         coolDown -= Time.deltaTime;
-        transform.position = assignedPlayer.transform.position + (Vector3)holdingOffset;
+        transform.position = isFacingRight ? assignedPlayer.transform.position + (Vector3)holdingOffset :
+            assignedPlayer.transform.position + new Vector3(-holdingOffset.x, holdingOffset.y, 0f);
 
         //Not working, update with new input system
 
