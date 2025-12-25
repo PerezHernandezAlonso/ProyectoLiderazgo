@@ -1,3 +1,5 @@
+using ChristinaCreatesGames.Animations;
+using System.Collections;
 using System.Security;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -45,11 +47,16 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float shootingKnockbackForce = 5f;
     float knockbackDamping = 10f;
 
+    SquashAndStretch squashAndStretch;
+    [SerializeField] ParticleSystem muscleflash;
+    [SerializeField] ParticleSystem smoke;
+
     private void Awake()
     {
         isFacingRight = true;
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponentInChildren<Animator>();
+        squashAndStretch = GetComponentInChildren<SquashAndStretch>();
 
         playerInput = GetComponent<InputManagerForPlayer>();
     }
@@ -282,7 +289,7 @@ public class PlayerMovement : MonoBehaviour
 
         VerticalVelocity = Mathf.Clamp(VerticalVelocity, -stats.MaxFallSpeed, 50f);
 
-        rb.linearVelocity = new Vector2(rb.linearVelocity.x, VerticalVelocity);
+        //rb.linearVelocity = new Vector2(rb.linearVelocity.x, VerticalVelocity);
     }
     void CountTimers()
     {
@@ -409,7 +416,8 @@ public class PlayerMovement : MonoBehaviour
                 currentAmmo = maxCurrentAmmo;
                 break;
         }
-        shotCooldown = false;
+        HandleAnimations();
+        shotCooldown = false; smoke.Stop();
     }
     void CheckShoot()
     {
@@ -444,12 +452,16 @@ public class PlayerMovement : MonoBehaviour
         else { SpawnBulletShoot(speed, spread, range); }
 
         shotCooldown = true;
+        smoke.Play();
         Invoke(nameof(EnableShooting), rate);
+
+        squashAndStretch.PlaySquashAndStretch();
+        muscleflash.Play();
     }
 
     void SpawnBulletShoot(float speed, int spread, float range)
     {
-        float offset = 1f;
+        float offset = 1.5f;
         Vector3 spawnPos = transform.position + new Vector3(isFacingRight ? offset : -offset, 0.2f, 0);
 
         float baseAngle = isFacingRight ? 0f : 180f;
@@ -466,8 +478,14 @@ public class PlayerMovement : MonoBehaviour
 
         Destroy(newBullet, range);
     }
+    void EnableShooting() { shotCooldown = false; smoke.Stop(); }
 
-    void EnableShooting() { shotCooldown = false; }
+    public void AddKnockback(float direction, float strength)
+    {
+        knockback += direction * strength;
+
+        squashAndStretch.PlaySquashAndStretch();
+    }
 
     // ANIMATIONS
 
@@ -530,6 +548,5 @@ public class PlayerMovement : MonoBehaviour
         bool isBlocking = currentAnim == "Jump" || currentAnim == "Land" || currentAnim == "Stop";
         return isBlocking && stateInfo.normalizedTime < .9f;
     }
-
 }
 
