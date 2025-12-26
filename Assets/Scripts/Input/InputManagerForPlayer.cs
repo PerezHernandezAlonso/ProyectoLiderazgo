@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,6 +15,7 @@ public class InputManagerForPlayer : MonoBehaviour
     private InputAction shoot;
 
 
+    public bool canMove;
     public Vector2 MoveInput { get; private set; }
     public bool JumpButton { get; private set; }
     public bool JumpButtonDown { get; private set; }
@@ -59,7 +61,23 @@ public class InputManagerForPlayer : MonoBehaviour
         if (JumpButtonDown) jumpBuffer.RegisterInput();
         jumpBuffer.Update();
 
-        ShootButton = shoot.IsPressed();    
+        ShootButton = shoot.IsPressed();
+
+        //In case the player is dead, it shouldn't be able to input anything
+        if (!canMove)
+        {
+            MoveInput = Vector2.zero;
+
+            JumpButton = false;
+            JumpButtonDown = false;
+            JumpButtonUp = false;
+
+            AttackButton = false;
+            AttackButtonDown = false;
+
+            ShootButton = false;
+            return;
+        }
     }
     public class InputBuffer
     {
