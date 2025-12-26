@@ -36,7 +36,8 @@ public class Bullet : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             //Here's where the character's method to take damage will play
-            
+            PlayerHealthManager healthManager = collision.gameObject.GetComponent<PlayerHealthManager>();
+            healthManager.LoseLife(damage);
             //Now, it will be destroyed
             Destroy(gameObject, 0f);
         }

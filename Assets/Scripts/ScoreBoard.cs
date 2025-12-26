@@ -22,12 +22,25 @@ public class ScoreBoard : MonoBehaviour
         if (isPlayer2)
         {
             player2Score++;
-
+            if (player2Score >= maxScore) 
+            {
+                Win(true);
+            }
         }
         else
         {
             player1Score++;
+            if (player1Score >= maxScore)
+            {
+                Win(false);
+            }
+
         }
+
+    }
+
+    public void ScorePlayer1()
+    {
 
     }
     void Win(bool isPlayer2)

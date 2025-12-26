@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealthManager : MonoBehaviour
 {
@@ -36,11 +38,18 @@ public class PlayerHealthManager : MonoBehaviour
         inputManagerForPlayer.canMove = false;
         if (playerMovement.is2P)
         {
-
+            scoreBoard.OnPlayerScored(true);
         }
         else
         {
-
+            scoreBoard.OnPlayerScored(false);
         }
+    }
+
+    IEnumerator ResetSceneAfterWaitTime()
+    {
+        yield return new WaitForSeconds(4);
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(currentSceneName);
     }
 }
