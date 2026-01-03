@@ -68,7 +68,13 @@ public class PlayerMovement : MonoBehaviour
         CheckShoot();
 
         HandleAnimations();
+
+        // borrar cuando se implemente la recogida de armas
+        if (pickUpGun) { PickUpGun(guns.pistol); pickUpGun = false; }   
     }
+
+    // borrar cuando se implemente la recogida de armas
+    public bool pickUpGun;
 
     private void FixedUpdate()
     {
@@ -371,7 +377,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] guns currentGun;
 
     int maxCurrentAmmo;
-    int currentAmmo;
+    [SerializeField] int currentAmmo;
 
     bool shotCooldown;
 
@@ -383,6 +389,7 @@ public class PlayerMovement : MonoBehaviour
     float pistolRange = .4f;
     int pistolSpread = 0;
     float pistolRate = .3f;
+    [SerializeField] ParticleSystem pistolDrop;
 
     [Header("Shotgun")]
     int shotgunMaxAmmo = 3;
@@ -390,6 +397,7 @@ public class PlayerMovement : MonoBehaviour
     float shotgunRange = .1f;
     int shotgunSpread = 5;
     float shotgunRate = 1f;
+    [SerializeField] ParticleSystem shotgunDrop;
 
     [Header("Tommy")]
     int tommyMaxAmmo = 7;
@@ -397,6 +405,7 @@ public class PlayerMovement : MonoBehaviour
     float tommyRange = .4f;
     int tommySpread = 1;
     float tommyRate = .1f;
+    [SerializeField] ParticleSystem tommyDrop;
 
     public void PickUpGun(guns gunPickUp)
     {
@@ -457,6 +466,21 @@ public class PlayerMovement : MonoBehaviour
 
         squashAndStretch.PlaySquashAndStretch();
         muscleflash.Play();
+        if (currentAmmo > 0) { currentAmmo--; } 
+        else 
+        {
+            
+            switch (currentGun)
+            {
+                case guns.pistol: pistolDrop.Play(); 
+                    break;
+                case guns.shotgun: shotgunDrop.Play(); 
+                    break;
+                case guns.tommy: tommyDrop.Play();
+                    break;
+            }
+            PickUpGun(guns.none);
+        }
     }
 
     void SpawnBulletShoot(float speed, int spread, float range)

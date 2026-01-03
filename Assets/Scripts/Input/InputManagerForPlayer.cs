@@ -15,7 +15,7 @@ public class InputManagerForPlayer : MonoBehaviour
     private InputAction shoot;
 
 
-    public bool canMove;
+    public bool canMove = true;
     public Vector2 MoveInput { get; private set; }
     public bool JumpButton { get; private set; }
     public bool JumpButtonDown { get; private set; }
@@ -44,7 +44,6 @@ public class InputManagerForPlayer : MonoBehaviour
         attack = playerInput.actions["Attack"];
 
         shoot = playerInput.actions["Attack"];
-
     }
 
     private void Update()
