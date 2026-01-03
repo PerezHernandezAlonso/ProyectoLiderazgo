@@ -121,7 +121,7 @@ GameObject:
   - component: {fileID: 5168570962284563869}
   - component: {fileID: 172119445994847558}
   - component: {fileID: 8161893909671954132}
-  - component: {fileID: 7811027469545792745}
+  - component: {fileID: 5813791161181383256}
   m_Layer: 3
   m_Name: Plataforma (1)
   m_TagString: Untagged
@@ -283,7 +283,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!251 &7811027469545792745
+--- !u!251 &5813791161181383256
 PlatformEffector2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -312,7 +312,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5449343384572848327}
   m_Layer: 0
-  m_Name: OldSchoolFloor
+  m_Name: OldSchoolFloor 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -347,7 +347,7 @@ GameObject:
   - component: {fileID: 8931835967686291001}
   - component: {fileID: 4050365532130493190}
   - component: {fileID: 3335771680209828061}
-  - component: {fileID: 2830137620208990982}
+  - component: {fileID: 3470356557613510269}
   m_Layer: 3
   m_Name: Plataforma
   m_TagString: Untagged
@@ -364,7 +364,7 @@ Transform:
   m_GameObject: {fileID: 8662798850839105240}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -13.58, y: -1.882, z: 0}
+  m_LocalPosition: {x: -5.1, y: -1.882, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -509,7 +509,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!251 &2830137620208990982
+--- !u!251 &3470356557613510269
 PlatformEffector2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
