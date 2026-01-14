@@ -10,10 +10,9 @@ public class InputManagerForPlayer : MonoBehaviour
     private InputAction jump;
 
     private InputAction attack;
-
-
     private InputAction shoot;
 
+    private InputAction start;
 
     public bool canMove = true;
     public Vector2 MoveInput { get; private set; }
@@ -25,6 +24,8 @@ public class InputManagerForPlayer : MonoBehaviour
     public bool AttackButtonDown { get; private set; }
 
     public bool ShootButton { get; private set; }
+
+    public bool StartButtonDown { get; private set; }
 
 
     private InputBuffer jumpBuffer;
@@ -44,6 +45,8 @@ public class InputManagerForPlayer : MonoBehaviour
         attack = playerInput.actions["Attack"];
 
         shoot = playerInput.actions["Attack"];
+
+        start = playerInput.actions["Start"];
     }
 
     private void Update()
@@ -61,6 +64,8 @@ public class InputManagerForPlayer : MonoBehaviour
         jumpBuffer.Update();
 
         ShootButton = shoot.IsPressed();
+
+        StartButtonDown = start.WasPressedThisFrame();
 
         //In case the player is dead, it shouldn't be able to input anything
         if (!canMove)
