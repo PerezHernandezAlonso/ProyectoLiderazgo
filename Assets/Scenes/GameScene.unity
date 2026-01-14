@@ -231,9 +231,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0
+    y: 0.28669724
     width: 1
-    height: 1
+    height: 0.42445526
   near clip plane: 0.1
   far clip plane: 5000
   field of view: 40
@@ -405,7 +405,7 @@ Transform:
   m_GameObject: {fileID: 444858024}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -3.1, z: 0}
+  m_LocalPosition: {x: 0, y: 14.19, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -710,6 +710,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d657dc13cbbcb64a97d9c0ed3a60fe0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  playerInputManager: {fileID: 0}
+  playerCount: 0
 --- !u!114 &781007807
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -12,10 +12,12 @@ GameObject:
   - component: {fileID: 38433020416454533}
   - component: {fileID: 8078898208218540132}
   - component: {fileID: 909157123794622815}
+  - component: {fileID: 7167907599477925637}
   - component: {fileID: -1406318537755179739}
+  - component: {fileID: 6433293852179873135}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28,8 +30,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 95335469790086585}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 10.97, y: -0.29, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -95,7 +97,7 @@ MonoBehaviour:
   pickUpGun: 0
   currentGun: 0
   currentAmmo: 0
-  bullet: {fileID: 1741324345822296204, guid: 836a6eec481e38649bdc8cc272dfc780, type: 3}
+  bullet: {fileID: 905249262110153154, guid: 31f6677c1f835a946a0f8e95c7580fab, type: 3}
   pistolDrop: {fileID: 7079481521497920872}
   shotgunDrop: {fileID: 4387489263426793898}
   tommyDrop: {fileID: 4535915549306236140}
@@ -129,6 +131,21 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &7167907599477925637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 95335469790086585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6d18fe68c8030b4cbe3a02881887656, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerHealthManager
+  maxHealth: 5
+  currentHealth: 0
+  scoreBoard: {fileID: 0}
 --- !u!114 &-1406318537755179739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,6 +160,52 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InputManagerForPlayer
   canMove: 1
   inputBufferTime: 0.2
+--- !u!61 &6433293852179873135
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 95335469790086585}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0.05483687}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1, y: 1.8520782}
+  m_EdgeRadius: 0
 --- !u!1 &715139772350955494
 GameObject:
   m_ObjectHideFlags: 0
