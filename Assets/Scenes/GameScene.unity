@@ -143,6 +143,7 @@ GameObject:
   - component: {fileID: 83373201}
   - component: {fileID: 83373194}
   - component: {fileID: 83373198}
+  - component: {fileID: 83373202}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -324,6 +325,21 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   CustomBlends: {fileID: 0}
+--- !u!114 &83373202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 83373193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7de5b9a60ea38aa42ac84c6a52104dcc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraVerticalScroller
+  startSpeed: 1
+  maxSpeed: 6
+  acceleration: 0.5
 --- !u!1 &327296825
 GameObject:
   m_ObjectHideFlags: 0
@@ -389,7 +405,7 @@ Transform:
   m_GameObject: {fileID: 444858024}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 20, z: 0}
+  m_LocalPosition: {x: 0, y: -3.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -414,8 +430,9 @@ MonoBehaviour:
   - {fileID: 4481727127181340464, guid: c37f17c8c4eae9243a0c499dea83f1e8, type: 3}
   - {fileID: 4481727127181340464, guid: 4b5c7dd041ac69643815fddfa8be7b52, type: 3}
   spawnearPisos: 1
-  intervaloEntreSpawnDePisos: 1
+  intervaloEntreSpawnDePisos: 0.5
   suelo: {fileID: 0}
+  MaximosPisos: 10
 --- !u!1 &664177825
 GameObject:
   m_ObjectHideFlags: 0
@@ -566,9 +583,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51d61cd8291d1de4ba07f5f610dd5cec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ControlPiso
-  velocidad: 5
-  alturaLimite: -15
-  cargaDeBloques: {fileID: 0}
+  DuracionDePiso: 11
 --- !u!1 &699809769
 GameObject:
   m_ObjectHideFlags: 0
@@ -1015,9 +1030,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51d61cd8291d1de4ba07f5f610dd5cec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ControlPiso
-  velocidad: 5
-  alturaLimite: -15
-  cargaDeBloques: {fileID: 0}
+  DuracionDePiso: 11
 --- !u!61 &1259311700
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1390,7 +1403,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1365692674
 Transform:
   m_ObjectHideFlags: 0
@@ -1625,9 +1638,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51d61cd8291d1de4ba07f5f610dd5cec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ControlPiso
-  velocidad: 5
-  alturaLimite: -15
-  cargaDeBloques: {fileID: 0}
+  DuracionDePiso: 11
 --- !u!61 &1861689641
 BoxCollider2D:
   m_ObjectHideFlags: 0

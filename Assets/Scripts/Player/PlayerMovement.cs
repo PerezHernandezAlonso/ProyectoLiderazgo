@@ -369,7 +369,7 @@ public class PlayerMovement : MonoBehaviour
     void CollisionChecks()
     {
         IsGrounded();
-        BumpedHead();
+        //BumpedHead();
     }
 
     // PLAYERS SHOOT

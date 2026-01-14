@@ -1,18 +1,44 @@
-using System.Collections;
 using UnityEngine;
-
 
 public class CargaDeBloques : MonoBehaviour
 {
     public GameObject Spawner;
     public GameObject[] pisos;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     [SerializeField] bool spawnearPisos = true;
-
-    [SerializeField] float intervaloEntreSpawnDePisos = 3f;
-
+    [SerializeField] float intervaloEntreSpawnDePisos = 1f;
     [SerializeField] GameObject suelo;
+    [SerializeField] int MaximosPisos = 10;
+
+    private float timer;
+
+    private void Start()
+    {
+        Destroy(suelo);
+    }
+
+    private void Update()
+    {
+        if (!spawnearPisos) return;
+
+        timer += Time.deltaTime;
+
+        if (timer >= intervaloEntreSpawnDePisos)
+        {
+            timer = 0f;
+            ComprobarYSpawnear();
+        }
+    }
+
+    void ComprobarYSpawnear()
+    {
+        int pisosEnEscena = GameObject.FindGameObjectsWithTag("Piso").Length;
+
+        if (pisosEnEscena < MaximosPisos)
+        {
+            DefinirPisoSpawn();
+        }
+    }
 
     public void DefinirPisoSpawn()
     {
@@ -24,27 +50,4 @@ public class CargaDeBloques : MonoBehaviour
     {
         Instantiate(piso, Spawner.transform.position, Spawner.transform.rotation);
     }
-
-    private void Start()
-    {
-        EmpezarASpawnearPisos();
-    }
-
-    public void EmpezarASpawnearPisos()
-    {
-        if (spawnearPisos) 
-        {
-            StartCoroutine(SpawnearPisosEnBucle()); // esto se llamará al empezar la partida
-            Destroy(suelo);
-        }
-    }
-
-    IEnumerator SpawnearPisosEnBucle()
-    {
-        yield return new WaitForSeconds(intervaloEntreSpawnDePisos);
-        DefinirPisoSpawn();
-        if (!spawnearPisos) { yield return null; }
-        else { StartCoroutine(SpawnearPisosEnBucle()); }
-    }
-
 }

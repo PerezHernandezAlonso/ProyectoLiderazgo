@@ -141,6 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 999d958112db99743bc54b7ac3993995, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InputManagerForPlayer
+  canMove: 1
   inputBufferTime: 0.2
 --- !u!1 &715139772350955494
 GameObject:
