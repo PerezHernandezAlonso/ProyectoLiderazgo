@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 public class GameManager : MonoBehaviour
 {
     private PlayerInputManager playerInputManager;
-    private int playerCount = 0;
+    public int playerCount = 0;
     private void Awake()
     {
         playerInputManager = GetComponent<PlayerInputManager>();
