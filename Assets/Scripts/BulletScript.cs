@@ -15,8 +15,10 @@ public class Bullet : MonoBehaviour
     //(ex: 1 = normal gravity. 2 = double the gravity. 0 = no gravity)
     public float gravityFactor = 0f;
     //The damage of the weapon
-    public float damage;
+    public int damage = 1;
+    public float knockback = 5f;
 
+    [SerializeField] GameObject playerHitEffect;
     void Awake()
     {
         rb2D = GetComponent<Rigidbody2D>();
@@ -32,11 +34,18 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //Will collide with all the players unless the collider is well set
-        if (collision.CompareTag("Player"))
+        Debug.Log("Object collided with something");
+        if  (collision.CompareTag("Player"))
         {
+            Debug.Log("Collision worked");
             //Here's where the character's method to take damage will play
             PlayerHealthManager healthManager = collision.gameObject.GetComponent<PlayerHealthManager>();
+            collision.transform.TryGetComponent(out PlayerMovement player);
+            player.AddKnockback(direction.x, knockback);
+
+            Instantiate(playerHitEffect, collision.transform);
+
+            //Destroy(gameObject);
             healthManager.LoseLife(damage);
             //Now, it will be destroyed
             Destroy(gameObject, 0f);

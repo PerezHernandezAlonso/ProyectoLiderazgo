@@ -1,16 +1,37 @@
 using UnityEngine;
+using TMPro;
 
 public class ScoreBoard : MonoBehaviour
 {
+    public static ScoreBoard Instance;
+    public Transform healthContainer1;
+    public Transform healthContainer2;
+    public GameObject healthIconPrefab;
+
+    public TMP_Text player2Points;
+    public TMP_Text player1Points;
+
+
     public uint player1Score;
     public uint player2Score;
 
     public uint maxScore = 5;
 
+
+    void Awake()
+    {
+        
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
     private void Start()
     {
-        ResetScoreBoard();
-        DontDestroyOnLoad(this);
+        //ResetScoreBoard();
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     /// <summary>
@@ -38,11 +59,6 @@ public class ScoreBoard : MonoBehaviour
         }
 
     }
-
-    public void ScorePlayer1()
-    {
-
-    }
     void Win(bool isPlayer2)
     {
         Debug.Log($"Player {(isPlayer2 ? 2 : 1)} wins!");
@@ -53,5 +69,34 @@ public class ScoreBoard : MonoBehaviour
     {
         player1Score = 0;
         player2Score = 0;
+    }
+
+    public void GenerateHealthIcons(int amount)
+    {
+        
+        foreach (Transform child in healthContainer1)
+            Destroy(child.gameObject);
+
+        for (int i = 0; i < amount; i++)
+        {
+            Instantiate(healthIconPrefab, healthContainer1);
+        }
+        foreach (Transform child in healthContainer2)
+            Destroy(child.gameObject);
+
+        for (int i = 0; i < amount; i++)
+        {
+            Instantiate(healthIconPrefab, healthContainer2);
+        }
+    }
+    public void UpdatePlayerHealth(bool isPlayer2, int amount)
+    {
+        foreach (Transform child in !isPlayer2? healthContainer1: healthContainer2)
+            Destroy(child.gameObject);
+
+        for (int i = 0; i < amount; i++)
+        {
+            Instantiate(healthIconPrefab, !isPlayer2 ? healthContainer1 : healthContainer2);
+        }
     }
 }
