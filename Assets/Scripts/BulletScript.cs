@@ -46,7 +46,7 @@ public class Bullet : MonoBehaviour
             Instantiate(playerHitEffect, collision.transform);
 
             //Destroy(gameObject);
-            healthManager.LoseLife(damage);
+            healthManager.LoseHealth(damage);
             //Now, it will be destroyed
             Destroy(gameObject, 0f);
         }

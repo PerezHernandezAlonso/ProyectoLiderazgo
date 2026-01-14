@@ -1,11 +1,13 @@
-using UnityEngine;
-using TMPro;
 using System.Collections;
+using TMPro;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LoadingDots : MonoBehaviour
 {
     [Header("Text Settings")]
     [SerializeField] private TMP_Text text;
+    [SerializeField] private TMP_Text startText;
     [SerializeField] private bool isPlayer2;
     [SerializeField] private string baseText = "Loading";
 
@@ -23,6 +25,7 @@ public class LoadingDots : MonoBehaviour
 
     void Awake()
     {
+        if(isPlayer2) startText.gameObject.SetActive(false);
         gameManager = FindFirstObjectByType<GameManager>();
     }
 
@@ -31,9 +34,15 @@ public class LoadingDots : MonoBehaviour
         if (!isPlayer2)
         {
             if (gameManager.playerCount > 0) text.gameObject.SetActive(false);
-        }
-        else { if (gameManager.playerCount > 1) text.gameObject.SetActive(false); }
 
+        }
+        else if (gameManager.playerCount > 1)
+        {
+
+            startText.gameObject.SetActive(true);
+            text.gameObject.SetActive(false);
+
+        }
 
     }
 
@@ -55,4 +64,7 @@ public class LoadingDots : MonoBehaviour
             yield return new WaitForSeconds(delay);
         }
     }
+
+    
+
 }

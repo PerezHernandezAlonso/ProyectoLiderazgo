@@ -1,12 +1,16 @@
-using UnityEngine;
 using TMPro;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ScoreBoard : MonoBehaviour
 {
     public static ScoreBoard Instance;
     public Transform healthContainer1;
+    public Transform lifeContainer1;
     public Transform healthContainer2;
+    public Transform lifeContainer2;
     public GameObject healthIconPrefab;
+    public GameObject lifesIconPrefab;
 
     public TMP_Text player2Points;
     public TMP_Text player1Points;
@@ -62,7 +66,12 @@ public class ScoreBoard : MonoBehaviour
     void Win(bool isPlayer2)
     {
         Debug.Log($"Player {(isPlayer2 ? 2 : 1)} wins!");
+        if(isPlayer2)
+        SceneManager.LoadScene("Player2Wins");
+        else
+        SceneManager.LoadScene("Player1Wins");
         //Rest of the logic should go here. Something about maybe resetting the game, we need to make an actual scene for the game though
+        //Robin - Hecho :D
     }
 
     public void ResetScoreBoard()
@@ -97,6 +106,16 @@ public class ScoreBoard : MonoBehaviour
         for (int i = 0; i < amount; i++)
         {
             Instantiate(healthIconPrefab, !isPlayer2 ? healthContainer1 : healthContainer2);
+        }
+    }
+    public void UpdatePlayerLifes(bool isPlayer2, int amount)
+    {
+        foreach (Transform child in !isPlayer2 ? lifeContainer1 : lifeContainer2)
+            Destroy(child.gameObject);
+
+        for (int i = 0; i < amount; i++)
+        {
+            Instantiate(healthIconPrefab, !isPlayer2 ? lifeContainer1 : lifeContainer2);
         }
     }
 }

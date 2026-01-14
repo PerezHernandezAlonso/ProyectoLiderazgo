@@ -2,8 +2,9 @@ using UnityEngine;
 
 public class BenjaBullet : MonoBehaviour
 {
-    [SerializeField] float damage = 1f;
+    [SerializeField] int damage = 1;
     [SerializeField] float knockback = 5f;
+    [SerializeField] bool isEnd;
 
     [SerializeField] GameObject playerHitEffect;
 
@@ -15,19 +16,20 @@ public class BenjaBullet : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if ( collision.transform.parent.TryGetComponent(out PlayerMovement player))
-        {
-            Vector3 direction = (player.transform.position - startingPosition).normalized;
-            player.AddKnockback(direction.x, knockback);
+        PlayerMovement player = collision.GetComponentInParent<PlayerMovement>();
+        if (player == null) return;
 
-            Instantiate(playerHitEffect, collision.transform);
-            
+        PlayerHealthManager healthManager =
+            collision.GetComponentInParent<PlayerHealthManager>();
+        if (healthManager == null) return;
 
-            Destroy(gameObject);
-        }
-        else
-        {
+        Vector3 direction = (player.transform.position - startingPosition).normalized;
+        player.AddKnockback(direction.x, knockback);
 
-        }
+        if (playerHitEffect != null)
+            Instantiate(playerHitEffect, player.transform);
+
+        healthManager.LoseHealth(damage);
+        if(!isEnd)Destroy(gameObject);
     }
 }

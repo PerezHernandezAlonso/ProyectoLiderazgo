@@ -28,9 +28,10 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.9, y: 0.9, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 3469032613647260448}
   - {fileID: 2764692383730922999}
   - {fileID: 7935467629374830307}
   m_Father: {fileID: 5449343384572848327}
@@ -47,9 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51d61cd8291d1de4ba07f5f610dd5cec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ControlPiso
-  velocidad: 5
-  alturaLimite: -15
-  cargaDeBloques: {fileID: 0}
+  DuracionDePiso: 11
 --- !u!212 &6487043173539534776
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -138,7 +137,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5449343384572848327}
+  m_Father: {fileID: 1330763853732561141}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8556642165142169973
 MonoBehaviour:
@@ -376,7 +375,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3469032613647260448}
   - {fileID: 1330763853732561141}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

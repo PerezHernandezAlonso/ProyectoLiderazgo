@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 872103691276992871}
   - component: {fileID: 2391954102535428517}
   - component: {fileID: 1603292677907654116}
-  - component: {fileID: 529375272852028926}
+  - component: {fileID: 5599945586740789807}
   m_Layer: 0
   m_Name: Bullet Prefab
   m_TagString: Untagged
@@ -156,7 +156,7 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.49999997
---- !u!114 &529375272852028926
+--- !u!114 &5599945586740789807
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -165,10 +165,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 905249262110153154}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e16fac7da4774b84c8d8dc4401f6a06b, type: 3}
+  m_Script: {fileID: 11500000, guid: 1a57228ab6761aa4e97d45d23be0a75a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bullet
-  direction: {x: 0, y: 0}
-  speed: 0
-  gravityFactor: 0
-  damage: 0
+  damage: 1
+  knockback: 5
+  playerHitEffect: {fileID: 3309201094108920201, guid: a089caf6fa43ca4419a6e3f2fe81def0, type: 3}

@@ -12,6 +12,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Collider2D feetCollider;
     [SerializeField] Collider2D bodyCollider;
     Rigidbody2D rb;
+    [SerializeField] GameManager gameManager;
+    [SerializeField] ChangeScene changeScene;
+    [SerializeField] InputManagerForPlayer inputManagerForPlayer;
 
     Vector2 moveVelocity;
     bool isFacingRight;
@@ -51,8 +54,15 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] ParticleSystem muscleflash;
     [SerializeField] ParticleSystem smoke;
 
+
     private void Awake()
     {
+        gameManager = FindFirstObjectByType<GameManager>();
+        if (FindFirstObjectByType<ChangeScene>() != null)
+        {
+            changeScene = FindFirstObjectByType<ChangeScene>();
+        }
+        inputManagerForPlayer = GetComponentInParent<InputManagerForPlayer>();
         isFacingRight = true;
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponentInChildren<Animator>();
@@ -63,6 +73,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        if (gameManager.playerCount >= 2)
+        {
+            if (inputManagerForPlayer.StartButtonDown == true)
+            {
+                changeScene.LoadScene();
+            }
+        }
+
         JumpChecks();
         CountTimers();
         CheckShoot();
@@ -371,7 +389,7 @@ public class PlayerMovement : MonoBehaviour
         IsGrounded();
         //BumpedHead();
     }
-
+    #region SHOOT
     // PLAYERS SHOOT
     public enum guns { none, pistol, shotgun, tommy };
     [SerializeField] guns currentGun;
@@ -482,7 +500,7 @@ public class PlayerMovement : MonoBehaviour
             PickUpGun(guns.none);
         }
     }
-
+    #endregion
     void SpawnBulletShoot(float speed, int spread, float range)
     {
         float offset = 1.5f;
