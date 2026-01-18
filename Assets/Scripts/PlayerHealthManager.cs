@@ -18,7 +18,10 @@ public class PlayerHealthManager : MonoBehaviour
     public GameManager gameManager;
 
 
-
+    private void Start()
+    {
+        scoreBoard.GenerateHealthIcons(5);
+    }
     private void Awake()
     {
         FindFirstObjectByType<ScoreBoard>();

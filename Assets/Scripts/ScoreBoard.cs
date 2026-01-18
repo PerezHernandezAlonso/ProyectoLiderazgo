@@ -47,6 +47,7 @@ public class ScoreBoard : MonoBehaviour
         if (isPlayer2)
         {
             player2Score++;
+            player2Points.text = player2Score.ToString();
             if (player2Score >= maxScore) 
             {
                 Win(true);
@@ -55,6 +56,7 @@ public class ScoreBoard : MonoBehaviour
         else
         {
             player1Score++;
+            player1Points.text = player1Score.ToString();
             if (player1Score >= maxScore)
             {
                 Win(false);
