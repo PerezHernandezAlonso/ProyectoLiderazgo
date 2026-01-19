@@ -22,15 +22,39 @@ public class PlayerHealthManager : MonoBehaviour
  
     private void Awake()
     {
-        FindFirstObjectByType<ScoreBoard>();
-        gameManager = FindFirstObjectByType<GameManager>();
+        ResolveReferences();
 
-        scoreBoard = ScoreBoard.Instance;
         currentHealth = maxHealth;
         currentLife = maxLifes;
-        inputManagerForPlayer = GetComponent<InputManagerForPlayer>();
-        playerMovement = GetComponent<PlayerMovement>();
-        inputManagerForPlayer.canMove = true;
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        ResolveReferences();
+    }
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+    void ResolveReferences()
+    {
+        if (gameManager == null)
+            gameManager = FindFirstObjectByType<GameManager>();
+
+        if (scoreBoard == null)
+            scoreBoard = ScoreBoard.Instance != null
+                ? ScoreBoard.Instance
+                : FindFirstObjectByType<ScoreBoard>();
+
+        if (inputManagerForPlayer == null)
+            inputManagerForPlayer = GetComponent<InputManagerForPlayer>();
+
+        if (playerMovement == null)
+            playerMovement = GetComponent<PlayerMovement>();
+
+        if (inputManagerForPlayer != null)
+            inputManagerForPlayer.canMove = true;
     }
 
     public void LoseHealth(int damage)

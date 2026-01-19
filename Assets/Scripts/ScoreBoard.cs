@@ -17,6 +17,7 @@ public class ScoreBoard : MonoBehaviour
 
     public Sprite[] healthicons1;
     public Sprite[] healthicons2;
+    public Sprite lostlifeIcon;
 
 
     public GameObject[] lifePlayer1;
@@ -81,7 +82,7 @@ public class ScoreBoard : MonoBehaviour
             player2Score++;
             player2Points.text = player2Score.ToString();
 
-            lifePlayer2[lifePlayer2.Length - player2Score].GetComponent<Image>().sprite = null;
+            lifePlayer2[lifePlayer2.Length - player2Score].GetComponent<Image>().sprite = lostlifeIcon;
             if (player2Score >= maxScore)
             {
                 Win(true);
@@ -91,7 +92,7 @@ public class ScoreBoard : MonoBehaviour
         {
             player1Score++;
             player1Points.text = player1Score.ToString();
-            lifePlayer1[lifePlayer1.Length - player1Score].GetComponent<Image>().sprite = null;
+            lifePlayer1[lifePlayer1.Length - player1Score].GetComponent<Image>().sprite = lostlifeIcon;
             if (player1Score >= maxScore)
             {
                 Win(false);

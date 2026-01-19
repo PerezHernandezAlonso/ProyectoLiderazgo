@@ -4,6 +4,8 @@ using System.Security;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
+
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -61,6 +63,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+
+
         gameManager = FindFirstObjectByType<GameManager>();
         if (FindFirstObjectByType<ChangeScene>() != null)
         {
@@ -443,6 +448,17 @@ public class PlayerMovement : MonoBehaviour
     string tommyShootSound = "tommySound";
     [SerializeField] ParticleSystem tommyDrop;
 
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        ResolveSceneReferences();
+        PickUpGun(guns.pistol);
+    }
+
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
     public void PickUpGun(guns gunPickUp)
     {
         currentGun = gunPickUp;
@@ -524,6 +540,18 @@ public class PlayerMovement : MonoBehaviour
             PickUpGun(guns.none);
         }
     }
+    void ResolveSceneReferences()
+    {
+        if (gameManager == null)
+            gameManager = FindFirstObjectByType<GameManager>();
+
+        if (changeScene == null)
+            changeScene = FindFirstObjectByType<ChangeScene>();
+
+        if (SoundManager == null)
+            SoundManager = GameObject.Find("EffectSoundManager");
+    }
+
     #endregion
     void SpawnBulletShoot(float speed, int spread, float range)
     {
