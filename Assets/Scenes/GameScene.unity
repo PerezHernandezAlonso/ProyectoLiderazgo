@@ -472,10 +472,10 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0
+    x: 0.1296875
     y: 0
-    width: 1
-    height: 1
+    width: 0.49537042
+    height: 0.49537036
   near clip plane: 0.1
   far clip plane: 5000
   field of view: 40
@@ -1086,7 +1086,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SoundManager
   master_mixer: {fileID: 24100000, guid: 15f9954ae96cc4e4397d688422f9d688, type: 2}
-  sounds: []
+  sounds:
+  - name: pistolSound
+    clip: {fileID: 8300000, guid: 5033f5c7105476d4091cc0f8ce98d9eb, type: 3}
+    randomPitch: 1
+    pitch: 0
+    volume: 0.115
+    loop: 0
+  - name: shotgunSound
+    clip: {fileID: 8300000, guid: c2a84aaf5475f4142aa3d0fd7fd5670d, type: 3}
+    randomPitch: 0
+    pitch: 0
+    volume: 0.126
+    loop: 0
+  - name: tommySound
+    clip: {fileID: 8300000, guid: cf02044bc13400c45b63e761f8531ffb, type: 3}
+    randomPitch: 1
+    pitch: 0
+    volume: 0.147
+    loop: 0
 --- !u!1 &590800040
 GameObject:
   m_ObjectHideFlags: 0
@@ -2016,7 +2034,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: a2e1141d37e6cdd468e9108c6cde06bb, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.286
+  m_Volume: 0.117
   m_Pitch: 1
   Loop: 1
   Mute: 0
