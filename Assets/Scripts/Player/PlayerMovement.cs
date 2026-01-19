@@ -42,6 +42,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float coyoteTimer;
 
     Animator animator;
+    Animator animatorOutline;
 
     InputManagerForPlayer playerInput;
     public bool is2P;
@@ -55,6 +56,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] ParticleSystem smoke;
 
     public GameObject SoundManager;
+    public GameObject MainSprite;
+    public GameObject PlayerOutline;
 
     private void Awake()
     {
@@ -66,11 +69,21 @@ public class PlayerMovement : MonoBehaviour
         inputManagerForPlayer = GetComponentInParent<InputManagerForPlayer>();
         isFacingRight = true;
         rb = GetComponent<Rigidbody2D>();
-        animator = GetComponentInChildren<Animator>();
+        animator = MainSprite.GetComponent<Animator>();
+        animatorOutline = PlayerOutline.GetComponent<Animator>();
         squashAndStretch = GetComponentInChildren<SquashAndStretch>();
 
         playerInput = GetComponent<InputManagerForPlayer>();
         SoundManager = GameObject.Find("EffectSoundManager");
+
+        if (is2P)
+        {
+            PlayerOutline.GetComponent<SpriteRenderer>().color = Color.red;
+        }
+        else
+        {
+            PlayerOutline.GetComponent<SpriteRenderer>().color = Color.blue;
+        }
     }
 
     private void Update()
@@ -587,10 +600,12 @@ public class PlayerMovement : MonoBehaviour
         if (is2P)
         {
             animator.Play(animName + "_2");
+            animatorOutline.Play(animName + "_2");
         }
         else
         {
             animator.Play(animName);
+            animatorOutline.Play(animName);
         }
 
         currentAnim = animName;
