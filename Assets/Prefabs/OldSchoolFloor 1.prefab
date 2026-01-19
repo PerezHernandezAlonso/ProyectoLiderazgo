@@ -677,6 +677,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GunCollectable(Aleatorio) (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7054684706796624379, guid: a4e7347a4ce0f6b46ba654b987f01054, type: 3}
+      propertyPath: destruirAlFinal
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -742,6 +746,10 @@ PrefabInstance:
     - target: {fileID: 5723845627555192319, guid: a4e7347a4ce0f6b46ba654b987f01054, type: 3}
       propertyPath: m_Name
       value: GunCollectable(Aleatorio)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7054684706796624379, guid: a4e7347a4ce0f6b46ba654b987f01054, type: 3}
+      propertyPath: destruirAlFinal
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
