@@ -119,15 +119,17 @@ public class ScoreBoard : MonoBehaviour
 
     public void UpdatePlayerHealth(bool isPlayer2, int amount)
     {
-
+        Debug.Log(amount);
         if (isPlayer2)
         {
+            if (amount == 0) amount = 1;
             player2health = player2health - amount;
             if (player2health < 0) player2health = 0;
             healthContainer2.GetComponent<Image>().sprite = healthicons[player2health];
         }
         else
         {
+            if (amount == 0) amount = 1;
             player1health = player1health - amount;
             if (player1health < 0) player1health = 0;
             healthContainer1.GetComponent<Image>().sprite = healthicons[player1health];
