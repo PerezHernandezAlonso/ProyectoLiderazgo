@@ -472,10 +472,10 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.1296875
+    x: 0
     y: 0
-    width: 0.49537042
-    height: 0.49537036
+    width: 1
+    height: 1
   near clip plane: 0.1
   far clip plane: 5000
   field of view: 40
@@ -1089,8 +1089,8 @@ MonoBehaviour:
   sounds:
   - name: pistolSound
     clip: {fileID: 8300000, guid: 5033f5c7105476d4091cc0f8ce98d9eb, type: 3}
-    randomPitch: 1
-    pitch: 0
+    randomPitch: 0
+    pitch: 1
     volume: 0.115
     loop: 0
   - name: shotgunSound
@@ -1102,7 +1102,7 @@ MonoBehaviour:
   - name: tommySound
     clip: {fileID: 8300000, guid: cf02044bc13400c45b63e761f8531ffb, type: 3}
     randomPitch: 1
-    pitch: 0
+    pitch: 1
     volume: 0.147
     loop: 0
 --- !u!1 &590800040

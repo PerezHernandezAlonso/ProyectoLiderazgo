@@ -479,10 +479,10 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.1296875
+    x: 0
     y: 0
-    width: 0.49537042
-    height: 0.49537036
+    width: 1
+    height: 1
   near clip plane: 0.1
   far clip plane: 5000
   field of view: 40
@@ -585,7 +585,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 0.158
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -684,9 +684,9 @@ MonoBehaviour:
   - name: ItalianVictory
     clip: {fileID: 8300000, guid: dde22d2f31028134382ba4a8b9e7bfc7, type: 3}
     randomPitch: 0
-    pitch: 0
+    pitch: 1.03
     volume: 0.139
-    loop: 1
+    loop: 0
 --- !u!1 &609461965
 GameObject:
   m_ObjectHideFlags: 0
