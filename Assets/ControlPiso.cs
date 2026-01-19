@@ -8,6 +8,17 @@ public class ControlPiso : MonoBehaviour
     void Start()
     {
         // Destruye este piso después de X segundos
-        Destroy(transform.parent.gameObject, DuracionDePiso);
+        //Destroy(transform.parent.gameObject, DuracionDePiso);
     }
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Piso"))
+        {
+            Debug.Log("despawneandoMapa");
+            Destroy(collision.gameObject);
+        }
+    }
+    
 }

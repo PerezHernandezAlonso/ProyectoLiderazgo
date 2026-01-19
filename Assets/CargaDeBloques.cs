@@ -50,4 +50,6 @@ public class CargaDeBloques : MonoBehaviour
     {
         Instantiate(piso, Spawner.transform.position, Spawner.transform.rotation);
     }
+
+
 }

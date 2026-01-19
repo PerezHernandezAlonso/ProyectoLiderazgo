@@ -18,10 +18,7 @@ public class PlayerHealthManager : MonoBehaviour
     public GameManager gameManager;
 
 
-    private void Start()
-    {
-        scoreBoard.GenerateHealthIcons(5);
-    }
+ 
     private void Awake()
     {
         FindFirstObjectByType<ScoreBoard>();
@@ -41,8 +38,20 @@ public class PlayerHealthManager : MonoBehaviour
         {
             Debug.Log("Salud 0");
             if (!gameManager.IsTraining)
+            {
+                currentHealth = 5;
                 Die();
-            else StartCoroutine(gameManager.Respawn(gameObject));
+                Debug.Log("muerto");
+                scoreBoard.UpdatePlayerHealth(playerMovement.is2P, 0);
+            }
+            else
+            {
+                currentHealth = 5;
+                Die();
+                Debug.Log("muerto");
+                scoreBoard.UpdatePlayerHealth(playerMovement.is2P, 0);
+            }
+
         }
         else
         {
@@ -63,6 +72,7 @@ public class PlayerHealthManager : MonoBehaviour
             scoreBoard.OnPlayerScored(true);
         }
         StartCoroutine(gameManager.Respawn(gameObject));
+        scoreBoard.UpdatePlayerHealth(playerMovement.is2P, 0);
     }
     public void LoseLife()
     {

@@ -54,6 +54,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] ParticleSystem muscleflash;
     [SerializeField] ParticleSystem smoke;
 
+    public GameObject SoundManager;
 
     private void Awake()
     {
@@ -69,6 +70,7 @@ public class PlayerMovement : MonoBehaviour
         squashAndStretch = GetComponentInChildren<SquashAndStretch>();
 
         playerInput = GetComponent<InputManagerForPlayer>();
+        SoundManager = GameObject.Find("EffectSoundManager");
     }
 
     private void Update()
@@ -88,7 +90,7 @@ public class PlayerMovement : MonoBehaviour
         HandleAnimations();
 
         // borrar cuando se implemente la recogida de armas
-        if (pickUpGun) { PickUpGun(guns.pistol); pickUpGun = false; }   
+        if (pickUpGun) { PickUpGun(guns.pistol); pickUpGun = false; }
     }
 
     // borrar cuando se implemente la recogida de armas
@@ -101,7 +103,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (isGrounded) { Move(stats.GroundAcceleration, stats.GroundDeceleration, playerInput.MoveInput); }
         else { Move(stats.AirAcceleration, stats.AirDeceleration, playerInput.MoveInput); }
-       
+
         knockback = Mathf.Lerp(knockback, 0f, knockbackDamping * Time.fixedDeltaTime);
         rb.linearVelocity = new Vector2(moveVelocity.x + knockback, VerticalVelocity);
     }
@@ -407,6 +409,7 @@ public class PlayerMovement : MonoBehaviour
     float pistolRange = .4f;
     int pistolSpread = 0;
     float pistolRate = .3f;
+    string pistolShootSound = "pistolSound";
     [SerializeField] ParticleSystem pistolDrop;
 
     [Header("Shotgun")]
@@ -415,6 +418,7 @@ public class PlayerMovement : MonoBehaviour
     float shotgunRange = .1f;
     int shotgunSpread = 5;
     float shotgunRate = 1f;
+    string shotgunShootSound = "shotgunSound";
     [SerializeField] ParticleSystem shotgunDrop;
 
     [Header("Tommy")]
@@ -423,6 +427,7 @@ public class PlayerMovement : MonoBehaviour
     float tommyRange = .4f;
     int tommySpread = 1;
     float tommyRate = .1f;
+    string tommyShootSound = "tommySound";
     [SerializeField] ParticleSystem tommyDrop;
 
     public void PickUpGun(guns gunPickUp)
@@ -454,12 +459,15 @@ public class PlayerMovement : MonoBehaviour
             switch (currentGun)
             {
                 case guns.pistol:
+                    SoundManager.GetComponent<SoundManager>().PlaySound(pistolShootSound);
                     Shoot(pistolSpeed, pistolSpread, pistolRate, pistolRange);
                     break;
                 case guns.shotgun:
+                    SoundManager.GetComponent<SoundManager>().PlaySound(shotgunShootSound);
                     Shoot(shotgunSpeed, shotgunSpread, shotgunRate, shotgunRange);
                     break;
                 case guns.tommy:
+                    SoundManager.GetComponent<SoundManager>().PlaySound(tommyShootSound);
                     Shoot(tommySpeed, tommySpread, tommyRate, tommyRange);
                     break;
             }
@@ -484,17 +492,20 @@ public class PlayerMovement : MonoBehaviour
 
         squashAndStretch.PlaySquashAndStretch();
         muscleflash.Play();
-        if (currentAmmo > 0) { currentAmmo--; } 
-        else 
+        if (currentAmmo > 0) { currentAmmo--; }
+        else
         {
-            
+
             switch (currentGun)
             {
-                case guns.pistol: pistolDrop.Play(); 
+                case guns.pistol:
+                    pistolDrop.Play();
                     break;
-                case guns.shotgun: shotgunDrop.Play(); 
+                case guns.shotgun:
+                    shotgunDrop.Play();
                     break;
-                case guns.tommy: tommyDrop.Play();
+                case guns.tommy:
+                    tommyDrop.Play();
                     break;
             }
             PickUpGun(guns.none);
