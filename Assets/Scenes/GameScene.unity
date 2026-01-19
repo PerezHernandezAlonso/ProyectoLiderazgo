@@ -2016,7 +2016,7 @@ MonoBehaviour:
   master_mixer: {fileID: 24100000, guid: 15f9954ae96cc4e4397d688422f9d688, type: 2}
   sounds:
   - name: MusicaLiderazgoPrueba1
-    clip: {fileID: 8300000, guid: a2e1141d37e6cdd468e9108c6cde06bb, type: 3}
+    clip: {fileID: 8300000, guid: 15b45f754bc8dee429b279c690790a65, type: 3}
     randomPitch: 0
     pitch: 0
     volume: 0.139
@@ -2032,7 +2032,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 3316778096852885050, guid: 15f9954ae96cc4e4397d688422f9d688, type: 2}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: a2e1141d37e6cdd468e9108c6cde06bb, type: 3}
+  m_Resource: {fileID: 8300000, guid: 15b45f754bc8dee429b279c690790a65, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.117
   m_Pitch: 1
