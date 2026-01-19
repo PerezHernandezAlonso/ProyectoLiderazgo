@@ -1,5 +1,6 @@
 using System.Collections;
 using TMPro;
+using UnityEditor.Rendering.Canvas.ShaderGraph;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -34,7 +35,9 @@ public class PlayerHealthManager : MonoBehaviour
 
     public void LoseHealth(int damage)
     {
-        if (currentHealth <= damage)
+        if (!inputManagerForPlayer.canMove) return;
+
+        if (currentHealth <= 1)
         {
             Debug.Log("Salud 0");
             if (!gameManager.IsTraining)
@@ -42,16 +45,13 @@ public class PlayerHealthManager : MonoBehaviour
                 currentHealth = 5;
                 Die();
                 Debug.Log("muerto");
-                scoreBoard.UpdatePlayerHealth(playerMovement.is2P, 0);
             }
             else
             {
                 currentHealth = 5;
                 Die();
                 Debug.Log("muerto");
-                scoreBoard.UpdatePlayerHealth(playerMovement.is2P, 0);
             }
-
         }
         else
         {
@@ -73,18 +73,5 @@ public class PlayerHealthManager : MonoBehaviour
         }
         StartCoroutine(gameManager.Respawn(gameObject));
         scoreBoard.UpdatePlayerHealth(playerMovement.is2P, 0);
-    }
-    public void LoseLife()
-    {
-        if (currentLife <= 0)
-        {
-            Debug.Log("Vidas 0");
-        }
-        else
-        {
-            currentLife -= 1;
-            //if (scoreBoard != null)
-            //    scoreBoard.UpdatePlayerLifes(playerMovement.is2P, 1);
-        }
     }
 }

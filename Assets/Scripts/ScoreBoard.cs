@@ -15,7 +15,8 @@ public class ScoreBoard : MonoBehaviour
     public GameObject healthContainer1;
     public GameObject healthContainer2;
 
-    public Sprite[] healthicons;
+    public Sprite[] healthicons1;
+    public Sprite[] healthicons2;
 
 
     public GameObject[] lifePlayer1;
@@ -37,7 +38,7 @@ public class ScoreBoard : MonoBehaviour
 
     void Awake()
     {
-        
+
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -46,11 +47,10 @@ public class ScoreBoard : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }
-   void Start()
+    void Start()
     {
         /*getLifePlayer1();
         getLifePlayer2();*/
-        
     }
 
     /*public void getLifePlayer1()
@@ -82,7 +82,7 @@ public class ScoreBoard : MonoBehaviour
             player2Points.text = player2Score.ToString();
 
             lifePlayer2[lifePlayer2.Length - player2Score].GetComponent<Image>().sprite = null;
-            if (player2Score >= maxScore) 
+            if (player2Score >= maxScore)
             {
                 Win(true);
             }
@@ -103,10 +103,10 @@ public class ScoreBoard : MonoBehaviour
     void Win(bool isPlayer2)
     {
         Debug.Log($"Player {(isPlayer2 ? 2 : 1)} wins!");
-        if(isPlayer2)
-        SceneManager.LoadScene("Player2Wins");
+        if (isPlayer2)
+            SceneManager.LoadScene("Player2Wins");
         else
-        SceneManager.LoadScene("Player1Wins");
+            SceneManager.LoadScene("Player1Wins");
         //Rest of the logic should go here. Something about maybe resetting the game, we need to make an actual scene for the game though
         //Robin - Hecho :D
     }
@@ -120,33 +120,40 @@ public class ScoreBoard : MonoBehaviour
     public void UpdatePlayerHealth(bool isPlayer2, int amount)
     {
         Debug.Log(amount);
+
         if (isPlayer2)
         {
             if (amount == 0) amount = 1;
             player2health = player2health - amount;
-            if (player2health < 0) player2health = 0;
-            healthContainer2.GetComponent<Image>().sprite = healthicons[player2health];
+
+            if (isPlayer2 && player2health <= 0)
+            {
+                Debug.Log("heal");
+                player2health = 5;
+                healthContainer2.GetComponent<Image>().sprite = healthicons2[player2health - 1];
+            }
+            else
+            {
+                if (player2health < 0) player2health = 0;
+                healthContainer2.GetComponent<Image>().sprite = healthicons2[player2health - 1];
+            }
         }
         else
         {
             if (amount == 0) amount = 1;
             player1health = player1health - amount;
-            if (player1health < 0) player1health = 0;
-            healthContainer1.GetComponent<Image>().sprite = healthicons[player1health];
-        }
-        if (isPlayer2 && player2health <= 0)
-        {
-            Debug.Log("heal");
-            healthContainer2.GetComponent<Image>().sprite = healthicons[4];
-            player2health = 5;
-        }
-        else if (!isPlayer2 && player1health <= 0)
-        {
-            Debug.Log("heal");
-            player1health = 5;
-            healthContainer1.GetComponent<Image>().sprite = healthicons[4];
-        }
 
+            if (!isPlayer2 && player1health <= 0)
+            {
+                Debug.Log("heal");
+                player1health = 5;
+                healthContainer1.GetComponent<Image>().sprite = healthicons1[player1health - 1];
+            }
+            else
+            {
+                if (player1health < 0) player1health = 0;
+                healthContainer1.GetComponent<Image>().sprite = healthicons1[player1health - 1];
+            }
+        }
     }
-
 }

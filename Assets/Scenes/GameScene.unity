@@ -473,9 +473,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0
-    width: 1
-    height: 1
+    y: 0.03866602
+    width: 1.0005907
+    height: 0.92109716
   near clip plane: 0.1
   far clip plane: 5000
   field of view: 40
@@ -3485,18 +3485,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c3c600a5edd6214d849c70cd0eb0030, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScoreBoard
-  lifeContainer1: {fileID: 1182539190}
-  lifeContainer2: {fileID: 1562638301}
+  lifeContainer1: {fileID: 1562638301}
+  lifeContainer2: {fileID: 1182539190}
   healthIconPrefab: {fileID: 1304244198858352364, guid: a5f38e25c3086764bb2bf27937916c82, type: 3}
   lifesIconPrefab: {fileID: 3673300464356352327, guid: 27db400b5f11029478da4bedb17c6409, type: 3}
-  healthContainer1: {fileID: 1603855045}
-  healthContainer2: {fileID: 2049697936}
-  healthicons:
+  healthContainer1: {fileID: 2049697936}
+  healthContainer2: {fileID: 1603855045}
+  healthicons1:
   - {fileID: 21300000, guid: 00060cc1648ac304e9f782e5a436d992, type: 3}
   - {fileID: 21300000, guid: 55a03029594454d429f0c55ee9d12c9f, type: 3}
   - {fileID: 21300000, guid: f996621a382eca84ba5a221232ccce81, type: 3}
   - {fileID: 21300000, guid: a504f48a79708bb4eb1f7c79b10f7425, type: 3}
   - {fileID: 21300000, guid: ada5426a619349e4290fe3e141f71331, type: 3}
+  healthicons2:
+  - {fileID: 21300000, guid: 42fc1b4231e0818458710df74dd2ba2d, type: 3}
+  - {fileID: 21300000, guid: f536b8b259325e04aa8634786a302675, type: 3}
+  - {fileID: 21300000, guid: efe0d9d038b3a2a42988cdfadf2ac535, type: 3}
+  - {fileID: 21300000, guid: c672eadeed1e43a4c968a7ded11f15f6, type: 3}
+  - {fileID: 21300000, guid: d575e6733418ab3438c61ccf8e776b9f, type: 3}
   lifePlayer1:
   - {fileID: 1423212570}
   - {fileID: 2054912921}
@@ -3514,6 +3520,8 @@ MonoBehaviour:
   player1Score: 0
   player2Score: 0
   maxScore: 5
+  player1health: 5
+  player2health: 5
 --- !u!4 &1515613203
 Transform:
   m_ObjectHideFlags: 0
@@ -4025,7 +4033,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ada5426a619349e4290fe3e141f71331, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d575e6733418ab3438c61ccf8e776b9f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

@@ -42,7 +42,6 @@ public class GameManager : MonoBehaviour
         if(!IsTraining)
         {
             gameObject_.transform.position = puntoDeMuerte.transform.position;
-            gameObject_.GetComponent<PlayerHealthManager>().LoseLife();
             yield return new WaitForSeconds(4f);
         }
         if (gameObject_.GetComponentInParent<InputManagerForPlayer>() == FindFirstObjectByType<InputManagerForPlayer>())
