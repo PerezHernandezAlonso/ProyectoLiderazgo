@@ -935,7 +935,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CinematicManager
   blackOverlay: {fileID: 1153062723}
-  fadeDuration: 8
+  fadeDuration: 4.5
   nextScene: MenuScene
 --- !u!1 &1153062722
 GameObject:
